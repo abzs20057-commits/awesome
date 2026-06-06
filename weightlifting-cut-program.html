@@ -1,0 +1,1423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>12-Week Cut Program — Get Ripped</title>
+  <style>
+    :root {
+      --red: #e63946;
+      --red-dark: #c1121f;
+      --bg: #0a0a0a;
+      --surface: #111111;
+      --surface2: #1a1a1a;
+      --border: #2a2a2a;
+      --text: #f0f0f0;
+      --muted: #888;
+      --accent: #e63946;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(10,10,10,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 60px;
+    }
+    .nav-brand {
+      font-weight: 800;
+      font-size: 1rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--red);
+    }
+    .nav-links {
+      display: flex;
+      gap: 1.8rem;
+      list-style: none;
+    }
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 6rem 2rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 40%, rgba(230,57,70,0.12) 0%, transparent 70%),
+        repeating-linear-gradient(
+          0deg,
+          transparent,
+          transparent 40px,
+          rgba(255,255,255,0.018) 40px,
+          rgba(255,255,255,0.018) 41px
+        ),
+        repeating-linear-gradient(
+          90deg,
+          transparent,
+          transparent 40px,
+          rgba(255,255,255,0.018) 40px,
+          rgba(255,255,255,0.018) 41px
+        );
+      pointer-events: none;
+    }
+    .hero-eyebrow {
+      font-size: 0.75rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 1.2rem;
+      font-weight: 600;
+    }
+    .hero h1 {
+      font-size: clamp(2.8rem, 7vw, 5.5rem);
+      font-weight: 900;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.4rem;
+    }
+    .hero h1 span { color: var(--red); }
+    .hero-sub {
+      font-size: 1.1rem;
+      color: var(--muted);
+      max-width: 540px;
+      margin: 0 auto 2.5rem;
+    }
+    .hero-stats {
+      display: flex;
+      gap: 2.5rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 3rem;
+    }
+    .stat {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .stat-value {
+      font-size: 2.2rem;
+      font-weight: 900;
+      color: var(--red);
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      margin-top: 0.3rem;
+    }
+    .btn {
+      display: inline-block;
+      background: var(--red);
+      color: #fff;
+      text-decoration: none;
+      padding: 0.9rem 2.2rem;
+      border-radius: 4px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .btn:hover { background: var(--red-dark); transform: translateY(-1px); }
+
+    /* SECTIONS */
+    section {
+      padding: 5rem 2rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .section-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--red);
+      font-weight: 700;
+      margin-bottom: 0.6rem;
+    }
+    h2 {
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+    }
+    .section-intro {
+      color: var(--muted);
+      max-width: 580px;
+      margin-bottom: 3rem;
+      font-size: 1rem;
+    }
+
+    /* OVERVIEW GRID */
+    .overview-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      margin-bottom: 3rem;
+    }
+    .overview-card {
+      background: var(--surface);
+      padding: 1.6rem;
+    }
+    .overview-card-label {
+      font-size: 0.68rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.4rem;
+    }
+    .overview-card-value {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .principles-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1rem;
+    }
+    .principle {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.4rem;
+      border-left: 3px solid var(--red);
+    }
+    .principle h4 {
+      font-size: 0.9rem;
+      font-weight: 700;
+      margin-bottom: 0.3rem;
+      color: var(--text);
+    }
+    .principle p { font-size: 0.85rem; color: var(--muted); }
+
+    /* SPLIT TABLE */
+    .split-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 8px;
+      margin-bottom: 3rem;
+    }
+    .split-day {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem 0.8rem;
+      text-align: center;
+    }
+    .split-day.active { border-color: var(--red); background: rgba(230,57,70,0.06); }
+    .split-day.rest { opacity: 0.4; }
+    .split-day-name {
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      margin-bottom: 0.5rem;
+    }
+    .split-day-focus {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.3;
+    }
+    .split-day.active .split-day-focus { color: var(--red); }
+
+    /* PHASES */
+    .phase-tabs {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+    .phase-tab {
+      padding: 0.6rem 1.4rem;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      background: var(--surface);
+      color: var(--muted);
+      cursor: pointer;
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      transition: all 0.2s;
+      user-select: none;
+    }
+    .phase-tab.active {
+      background: var(--red);
+      border-color: var(--red);
+      color: #fff;
+    }
+    .phase-content { display: none; }
+    .phase-content.active { display: block; }
+
+    .phase-header {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px 8px 0 0;
+      padding: 1.4rem 1.8rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .phase-header h3 { font-size: 1.1rem; font-weight: 800; }
+    .phase-badge {
+      background: rgba(230,57,70,0.15);
+      color: var(--red);
+      border: 1px solid rgba(230,57,70,0.3);
+      border-radius: 100px;
+      padding: 0.25rem 0.9rem;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .phase-notes {
+      background: rgba(230,57,70,0.05);
+      border: 1px solid rgba(230,57,70,0.15);
+      border-top: none;
+      padding: 1rem 1.8rem;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    /* WORKOUT TABLE */
+    .workout-day {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      margin-bottom: 1rem;
+    }
+    .workout-day-header {
+      background: var(--surface2);
+      padding: 0.9rem 1.4rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      cursor: pointer;
+      user-select: none;
+      border-bottom: 1px solid var(--border);
+    }
+    .day-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--red);
+      flex-shrink: 0;
+    }
+    .workout-day-header h4 {
+      font-size: 0.88rem;
+      font-weight: 700;
+      flex: 1;
+    }
+    .workout-day-header .chevron {
+      font-size: 0.7rem;
+      color: var(--muted);
+      transition: transform 0.2s;
+    }
+    .workout-day.open .chevron { transform: rotate(180deg); }
+    .workout-body { display: none; }
+    .workout-day.open .workout-body { display: block; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+    }
+    thead th {
+      text-align: left;
+      padding: 0.75rem 1.2rem;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      border-bottom: 1px solid var(--border);
+      background: rgba(255,255,255,0.02);
+    }
+    tbody td {
+      padding: 0.8rem 1.2rem;
+      border-bottom: 1px solid var(--border);
+      color: var(--text);
+    }
+    tbody tr:last-child td { border-bottom: none; }
+    tbody tr:hover td { background: rgba(255,255,255,0.025); }
+    td:nth-child(2), td:nth-child(3) {
+      font-weight: 700;
+      color: var(--red);
+    }
+    td:last-child { color: var(--muted); font-size: 0.8rem; }
+
+    /* CIRCUIT */
+    .circuit-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 8px;
+      padding: 1.2rem;
+    }
+    .circuit-item {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 0.9rem 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+    .circuit-num {
+      font-size: 1.4rem;
+      font-weight: 900;
+      color: var(--red);
+      opacity: 0.5;
+      min-width: 2rem;
+      line-height: 1;
+    }
+    .circuit-name { font-size: 0.85rem; font-weight: 600; }
+    .circuit-reps { font-size: 0.75rem; color: var(--muted); }
+
+    /* CARDIO */
+    .cardio-timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      position: relative;
+      padding-left: 2rem;
+    }
+    .cardio-timeline::before {
+      content: '';
+      position: absolute;
+      left: 7px;
+      top: 8px;
+      bottom: 8px;
+      width: 2px;
+      background: var(--border);
+    }
+    .cardio-item {
+      position: relative;
+      padding: 1.2rem 1.4rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      margin-bottom: 8px;
+    }
+    .cardio-item::before {
+      content: '';
+      position: absolute;
+      left: -1.65rem;
+      top: 1.5rem;
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: var(--red);
+      border: 2px solid var(--bg);
+    }
+    .cardio-week {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 0.3rem;
+    }
+    .cardio-desc { font-size: 0.9rem; font-weight: 600; }
+    .cardio-detail { font-size: 0.8rem; color: var(--muted); margin-top: 0.2rem; }
+
+    /* NUTRITION */
+    .nutrition-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+    .nutrition-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.8rem;
+    }
+    .nutrition-card h3 {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--muted);
+      margin-bottom: 1.2rem;
+    }
+    .macro-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.7rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .macro-item:last-child { border-bottom: none; }
+    .macro-name { font-size: 0.9rem; font-weight: 600; }
+    .macro-val {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--red);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .food-category {
+      margin-bottom: 1.2rem;
+    }
+    .food-cat-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    .food-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .food-tag {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 0.28rem 0.8rem;
+      font-size: 0.78rem;
+      font-weight: 500;
+    }
+
+    /* SUPPLEMENTS */
+    .supps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1rem;
+    }
+    .supp-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.4rem;
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+    .supp-icon {
+      font-size: 1.6rem;
+      flex-shrink: 0;
+    }
+    .supp-name {
+      font-size: 0.9rem;
+      font-weight: 700;
+      margin-bottom: 0.2rem;
+    }
+    .supp-detail {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    /* RECOVERY */
+    .recovery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1rem;
+    }
+    .recovery-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.6rem;
+      text-align: center;
+    }
+    .recovery-icon {
+      font-size: 2rem;
+      margin-bottom: 0.8rem;
+    }
+    .recovery-card h4 {
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+    }
+    .recovery-card p { font-size: 0.85rem; color: var(--muted); }
+
+    /* MILESTONES */
+    .milestones {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1rem;
+    }
+    .milestone {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.4rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .milestone::after {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 3px;
+      background: var(--red);
+    }
+    .milestone-weeks {
+      font-size: 0.68rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--red);
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+    }
+    .milestone-text { font-size: 0.88rem; color: var(--muted); }
+
+    /* PROGRESS TRACKER */
+    .tracker-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+    .tracker-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.4rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .tracker-bullet {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: var(--red);
+      flex-shrink: 0;
+    }
+    .tracker-item span { font-size: 0.88rem; font-weight: 600; }
+
+    /* RESULTS CALLOUT */
+    .results-callout {
+      background: linear-gradient(135deg, rgba(230,57,70,0.1) 0%, rgba(230,57,70,0.03) 100%);
+      border: 1px solid rgba(230,57,70,0.25);
+      border-radius: 12px;
+      padding: 2.5rem;
+      text-align: center;
+      margin-top: 3rem;
+    }
+    .results-callout h3 {
+      font-size: 1.4rem;
+      font-weight: 900;
+      margin-bottom: 1rem;
+    }
+    .results-row {
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+      flex-wrap: wrap;
+    }
+    .result-item { text-align: center; }
+    .result-val {
+      font-size: 1.8rem;
+      font-weight: 900;
+      color: var(--red);
+      display: block;
+    }
+    .result-label { font-size: 0.78rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.8rem;
+    }
+    .disclaimer {
+      max-width: 600px;
+      margin: 0 auto 1rem;
+      font-size: 0.78rem;
+      color: var(--muted);
+      opacity: 0.7;
+    }
+
+    /* DIVIDER */
+    .divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 0;
+    }
+
+    @media (max-width: 700px) {
+      .split-grid { grid-template-columns: repeat(4, 1fr); }
+      .nutrition-grid { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+      .hero-stats { gap: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-brand">CutProgram</div>
+  <ul class="nav-links">
+    <li><a href="#overview">Overview</a></li>
+    <li><a href="#split">Split</a></li>
+    <li><a href="#workouts">Workouts</a></li>
+    <li><a href="#cardio">Cardio</a></li>
+    <li><a href="#nutrition">Nutrition</a></li>
+    <li><a href="#supplements">Supplements</a></li>
+    <li><a href="#recovery">Recovery</a></li>
+    <li><a href="#progress">Progress</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <p class="hero-eyebrow">12-Week Transformation Program</p>
+  <h1>Get <span>Ripped</span>.<br>Stay Strong.</h1>
+  <p class="hero-sub">A structured program combining compound strength, metabolic conditioning, and precision nutrition to cut fat and build muscle simultaneously.</p>
+  <div class="hero-stats">
+    <div class="stat">
+      <span class="stat-value">12</span>
+      <span class="stat-label">Weeks</span>
+    </div>
+    <div class="stat">
+      <span class="stat-value">5×</span>
+      <span class="stat-label">Per Week</span>
+    </div>
+    <div class="stat">
+      <span class="stat-value">3</span>
+      <span class="stat-label">Phases</span>
+    </div>
+    <div class="stat">
+      <span class="stat-value">~1lb</span>
+      <span class="stat-label">Fat/Week</span>
+    </div>
+  </div>
+  <a href="#overview" class="btn">Start the Program</a>
+</div>
+
+<hr class="divider" />
+
+<!-- OVERVIEW -->
+<section id="overview">
+  <p class="section-label">Program Overview</p>
+  <h2>Built to Cut Fat,<br>Not Muscle.</h2>
+  <p class="section-intro">Every detail — training volume, rest periods, cardio placement — is designed to maximise fat loss while preserving strength and adding definition.</p>
+
+  <div class="overview-grid">
+    <div class="overview-card">
+      <div class="overview-card-label">Duration</div>
+      <div class="overview-card-value">12 Weeks</div>
+    </div>
+    <div class="overview-card">
+      <div class="overview-card-label">Training Days</div>
+      <div class="overview-card-value">5 Days / Week</div>
+    </div>
+    <div class="overview-card">
+      <div class="overview-card-label">Session Length</div>
+      <div class="overview-card-value">60 – 75 min</div>
+    </div>
+    <div class="overview-card">
+      <div class="overview-card-label">Split Style</div>
+      <div class="overview-card-value">Upper / Lower + Metabolic</div>
+    </div>
+    <div class="overview-card">
+      <div class="overview-card-label">Caloric Approach</div>
+      <div class="overview-card-value">300 – 500 kcal Deficit</div>
+    </div>
+    <div class="overview-card">
+      <div class="overview-card-label">Protein Target</div>
+      <div class="overview-card-value">0.8 – 1g / lb BW</div>
+    </div>
+  </div>
+
+  <div class="principles-list">
+    <div class="principle">
+      <h4>Progressive Overload</h4>
+      <p>Increase weight or reps each week. The body only changes when forced to adapt.</p>
+    </div>
+    <div class="principle">
+      <h4>Compound-First</h4>
+      <p>Heavy compound lifts before isolation. More muscle recruited = more calories burned.</p>
+    </div>
+    <div class="principle">
+      <h4>Supersets</h4>
+      <p>Pair antagonist muscles to slash rest time, spike heart rate, and burn more total calories.</p>
+    </div>
+    <div class="principle">
+      <h4>High Protein</h4>
+      <p>Protein preserves muscle in a deficit and keeps you full. Non-negotiable.</p>
+    </div>
+    <div class="principle">
+      <h4>Phased Intensity</h4>
+      <p>Three escalating phases ensure the body never adapts and fat loss never stalls.</p>
+    </div>
+    <div class="principle">
+      <h4>Strategic Cardio</h4>
+      <p>LISS early, HIIT later. Ramp up the metabolic demand as conditioning improves.</p>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- SPLIT -->
+<section id="split">
+  <p class="section-label">Weekly Structure</p>
+  <h2>5-Day Training Split</h2>
+  <p class="section-intro">Upper/Lower alternating with a Wednesday metabolic circuit keeps intensity high while allowing adequate recovery between sessions.</p>
+
+  <div class="split-grid">
+    <div class="split-day active">
+      <div class="split-day-name">Mon</div>
+      <div class="split-day-focus">Upper Push</div>
+    </div>
+    <div class="split-day active">
+      <div class="split-day-name">Tue</div>
+      <div class="split-day-focus">Lower Squat</div>
+    </div>
+    <div class="split-day active">
+      <div class="split-day-name">Wed</div>
+      <div class="split-day-focus">Metabolic Circuit</div>
+    </div>
+    <div class="split-day active">
+      <div class="split-day-name">Thu</div>
+      <div class="split-day-focus">Upper Pull</div>
+    </div>
+    <div class="split-day active">
+      <div class="split-day-name">Fri</div>
+      <div class="split-day-focus">Lower Hinge</div>
+    </div>
+    <div class="split-day rest">
+      <div class="split-day-name">Sat</div>
+      <div class="split-day-focus">Active Recovery</div>
+    </div>
+    <div class="split-day rest">
+      <div class="split-day-name">Sun</div>
+      <div class="split-day-focus">Rest</div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- WORKOUTS -->
+<section id="workouts">
+  <p class="section-label">Training Program</p>
+  <h2>Phase-by-Phase Workouts</h2>
+  <p class="section-intro">Each phase escalates rest, volume, and cardio demands. Click a phase to see the training focus, then expand each day.</p>
+
+  <div class="phase-tabs">
+    <div class="phase-tab active" onclick="switchPhase('p1', this)">Phase 1 — Wks 1–4</div>
+    <div class="phase-tab" onclick="switchPhase('p2', this)">Phase 2 — Wks 5–8</div>
+    <div class="phase-tab" onclick="switchPhase('p3', this)">Phase 3 — Wks 9–12</div>
+  </div>
+
+  <!-- PHASE 1 -->
+  <div id="p1" class="phase-content active">
+    <div class="phase-header">
+      <h3>Foundation &amp; Conditioning</h3>
+      <span class="phase-badge">60–90s rest (compounds) · 45s (isolation)</span>
+    </div>
+    <div class="phase-notes">Focus on form, build the movement patterns, establish nutrition habits. Log your weights every session.</div>
+
+    <br>
+
+    <!-- Monday -->
+    <div class="workout-day open">
+      <div class="workout-day-header" onclick="toggleDay(this)">
+        <div class="day-dot"></div>
+        <h4>Monday — Upper A (Push)</h4>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="workout-body">
+        <table>
+          <thead><tr><th>Exercise</th><th>Sets</th><th>Reps</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr><td>Barbell Bench Press</td><td>4</td><td>6–8</td><td>Heavy, controlled descent</td></tr>
+            <tr><td>Incline Dumbbell Press</td><td>3</td><td>10–12</td><td>—</td></tr>
+            <tr><td>Overhead Press (BB or DB)</td><td>3</td><td>8–10</td><td>—</td></tr>
+            <tr><td>Lateral Raises</td><td>3</td><td>15</td><td>Superset with tricep pushdowns</td></tr>
+            <tr><td>Tricep Pushdowns (cable)</td><td>3</td><td>15</td><td>Superset with lateral raises</td></tr>
+            <tr><td>Face Pulls</td><td>3</td><td>15</td><td>Shoulder health — never skip</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Tuesday -->
+    <div class="workout-day">
+      <div class="workout-day-header" onclick="toggleDay(this)">
+        <div class="day-dot"></div>
+        <h4>Tuesday — Lower A (Squat Focus)</h4>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="workout-body">
+        <table>
+          <thead><tr><th>Exercise</th><th>Sets</th><th>Reps</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr><td>Barbell Back Squat</td><td>4</td><td>6–8</td><td>Heavy, full depth</td></tr>
+            <tr><td>Romanian Deadlift</td><td>3</td><td>10–12</td><td>Feel the hamstring stretch</td></tr>
+            <tr><td>Walking Lunges</td><td>3</td><td>12/leg</td><td>Add weight when possible</td></tr>
+            <tr><td>Leg Press</td><td>3</td><td>12–15</td><td>High foot placement for glutes</td></tr>
+            <tr><td>Calf Raises</td><td>4</td><td>15–20</td><td>Slow and controlled</td></tr>
+            <tr><td>Plank</td><td>3</td><td>45 sec</td><td>Core stability</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Wednesday -->
+    <div class="workout-day">
+      <div class="workout-day-header" onclick="toggleDay(this)">
+        <div class="day-dot"></div>
+        <h4>Wednesday — Full-Body Metabolic Circuit</h4>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="workout-body">
+        <div style="padding: 1rem 1.2rem; font-size: 0.82rem; color: var(--muted); border-bottom: 1px solid var(--border);">
+          3–4 rounds · 30s rest between exercises · 90s rest between rounds · Finish with 15 min steady-state cardio
+        </div>
+        <div class="circuit-grid">
+          <div class="circuit-item"><span class="circuit-num">1</span><div><div class="circuit-name">Kettlebell Swings</div><div class="circuit-reps">20 reps</div></div></div>
+          <div class="circuit-item"><span class="circuit-num">2</span><div><div class="circuit-name">Push-ups</div><div class="circuit-reps">15 reps</div></div></div>
+          <div class="circuit-item"><span class="circuit-num">3</span><div><div class="circuit-name">Goblet Squat</div><div class="circuit-reps">15 reps</div></div></div>
+          <div class="circuit-item"><span class="circuit-num">4</span><div><div class="circuit-name">Dumbbell Row</div><div class="circuit-reps">12 reps / arm</div></div></div>
+          <div class="circuit-item"><span class="circuit-num">5</span><div><div class="circuit-name">Box Jumps / Jump Squats</div><div class="circuit-reps">10 reps</div></div></div>
+          <div class="circuit-item"><span class="circuit-num">6</span><div><div class="circuit-name">Mountain Climbers</div><div class="circuit-reps">30 seconds</div></div></div>
+          <div class="circuit-item"><span class="circuit-num">7</span><div><div class="circuit-name">Battle Ropes</div><div class="circuit-reps">30 seconds</div></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Thursday -->
+    <div class="workout-day">
+      <div class="workout-day-header" onclick="toggleDay(this)">
+        <div class="day-dot"></div>
+        <h4>Thursday — Upper B (Pull)</h4>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="workout-body">
+        <table>
+          <thead><tr><th>Exercise</th><th>Sets</th><th>Reps</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr><td>Weighted Pull-ups</td><td>4</td><td>5–8</td><td>Add weight with belt or hold DB</td></tr>
+            <tr><td>Barbell Rows</td><td>4</td><td>8–10</td><td>Chest to pad or Pendlay row</td></tr>
+            <tr><td>Seated Cable Row</td><td>3</td><td>10–12</td><td>—</td></tr>
+            <tr><td>Single-arm DB Row</td><td>3</td><td>12/arm</td><td>Full range of motion</td></tr>
+            <tr><td>Barbell Curl</td><td>3</td><td>12</td><td>Superset with hammer curls</td></tr>
+            <tr><td>Hammer Curls</td><td>3</td><td>12</td><td>Superset with barbell curls</td></tr>
+            <tr><td>Rear Delt Fly</td><td>3</td><td>15</td><td>—</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Friday -->
+    <div class="workout-day">
+      <div class="workout-day-header" onclick="toggleDay(this)">
+        <div class="day-dot"></div>
+        <h4>Friday — Lower B (Hinge Focus)</h4>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="workout-body">
+        <table>
+          <thead><tr><th>Exercise</th><th>Sets</th><th>Reps</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr><td>Conventional Deadlift</td><td>4</td><td>5–6</td><td>Max focus, no grinding</td></tr>
+            <tr><td>Bulgarian Split Squat</td><td>3</td><td>10/leg</td><td>Brutal but effective</td></tr>
+            <tr><td>Leg Curl (machine or Nordic)</td><td>3</td><td>12–15</td><td>—</td></tr>
+            <tr><td>Hip Thrust (barbell)</td><td>4</td><td>12</td><td>Squeeze hard at top</td></tr>
+            <tr><td>Leg Extension</td><td>3</td><td>15</td><td>—</td></tr>
+            <tr><td>Ab Wheel Rollout</td><td>3</td><td>10</td><td>Controlled, protect lower back</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 2 -->
+  <div id="p2" class="phase-content">
+    <div class="phase-header">
+      <h3>Intensity Increase</h3>
+      <span class="phase-badge">45–75s rest (compounds) · 30–45s (isolation)</span>
+    </div>
+    <div class="phase-notes">Increase all compound weights by 2.5–5%. Add one drop set per session on a key isolation movement. Add 10-min HIIT finisher after Mon &amp; Thu sessions.</div>
+    <br>
+
+    <div class="workout-day open">
+      <div class="workout-day-header" onclick="toggleDay(this)">
+        <div class="day-dot"></div>
+        <h4>Progressive Overload Targets</h4>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="workout-body">
+        <table>
+          <thead><tr><th>Lift</th><th>Phase 1 Target</th><th>Phase 2 Target</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr><td>Bench Press</td><td>70–80% 1RM</td><td>75–85% 1RM</td><td>2.5–5kg increase</td></tr>
+            <tr><td>Squat</td><td>70–80% 1RM</td><td>75–85% 1RM</td><td>2.5–5kg increase</td></tr>
+            <tr><td>Deadlift</td><td>70–80% 1RM</td><td>80–90% 1RM</td><td>5kg increase</td></tr>
+            <tr><td>Pull-ups</td><td>Bodyweight</td><td>BW + 5–10kg</td><td>Use weight belt</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="workout-day">
+      <div class="workout-day-header" onclick="toggleDay(this)">
+        <div class="day-dot"></div>
+        <h4>HIIT Finisher (Mon &amp; Thu — 10 min)</h4>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="workout-body">
+        <div style="padding: 1rem 1.2rem; font-size: 0.82rem; color: var(--muted); border-bottom: 1px solid var(--border);">
+          20s on / 10s off × 20 rounds. Choose: rowing machine, assault bike, treadmill sprint, or jump rope.
+        </div>
+        <div class="circuit-grid">
+          <div class="circuit-item"><span class="circuit-num">20s</span><div><div class="circuit-name">Maximum effort</div><div class="circuit-reps">All-out sprint/row/bike</div></div></div>
+          <div class="circuit-item"><span class="circuit-num">10s</span><div><div class="circuit-name">Rest</div><div class="circuit-reps">Passive recovery</div></div></div>
+          <div class="circuit-item"><span class="circuit-num">×20</span><div><div class="circuit-name">Rounds</div><div class="circuit-reps">= 10 minutes total</div></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="workout-day">
+      <div class="workout-day-header" onclick="toggleDay(this)">
+        <div class="day-dot"></div>
+        <h4>Wednesday — Circuit (4–5 rounds)</h4>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="workout-body">
+        <div style="padding: 1rem 1.2rem; font-size: 0.82rem; color: var(--muted); border-bottom: 1px solid var(--border);">
+          Same exercises as Phase 1 — increase rounds to 4–5. Reduce rest to 20s between exercises, 75s between rounds.
+        </div>
+        <div class="circuit-grid">
+          <div class="circuit-item"><span class="circuit-num">1</span><div><div class="circuit-name">KB Swings</div><div class="circuit-reps">20 reps</div></div></div>
+          <div class="circuit-item"><span class="circuit-num">2</span><div><div class="circuit-name">Push-ups</div><div class="circuit-reps">15 reps</div></div></div>
+          <div class="circuit-item"><span class="circuit-num">3</span><div><div class="circuit-name">Goblet Squat</div><div class="circuit-reps">15 reps</div></div></div>
+          <div class="circuit-item"><span class="circuit-num">4</span><div><div class="circuit-name">DB Row</div><div class="circuit-reps">12 reps/arm</div></div></div>
+          <div class="circuit-item"><span class="circuit-num">5</span><div><div class="circuit-name">Jump Squats</div><div class="circuit-reps">10 reps</div></div></div>
+          <div class="circuit-item"><span class="circuit-num">6</span><div><div class="circuit-name">Mountain Climbers</div><div class="circuit-reps">30 seconds</div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 3 -->
+  <div id="p3" class="phase-content">
+    <div class="phase-header">
+      <h3>Peak &amp; Definition</h3>
+      <span class="phase-badge">30–60s rest (compounds) · 20–30s (isolation)</span>
+    </div>
+    <div class="phase-notes">All isolation exercises are now supersets. Wednesday becomes a 20-min AMRAP. Optional: fasted morning cardio 3×/week (incline walk or light bike). Caloric deficit can increase to 500 kcal.</div>
+    <br>
+
+    <div class="workout-day open">
+      <div class="workout-day-header" onclick="toggleDay(this)">
+        <div class="day-dot"></div>
+        <h4>Phase 3 Superset Pairings</h4>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="workout-body">
+        <table>
+          <thead><tr><th>Pair</th><th>Exercise A</th><th>Sets</th><th>Exercise B</th></tr></thead>
+          <tbody>
+            <tr><td>Chest / Back</td><td>Incline DB Press</td><td>3 × 12</td><td>Seated Cable Row</td></tr>
+            <tr><td>Shoulders / Rear Delt</td><td>Lateral Raise</td><td>3 × 15</td><td>Rear Delt Fly</td></tr>
+            <tr><td>Biceps / Triceps</td><td>Barbell Curl</td><td>3 × 12</td><td>Skull Crushers</td></tr>
+            <tr><td>Quads / Hamstrings</td><td>Leg Extension</td><td>3 × 15</td><td>Leg Curl</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="workout-day">
+      <div class="workout-day-header" onclick="toggleDay(this)">
+        <div class="day-dot"></div>
+        <h4>Wednesday — 20-Minute AMRAP</h4>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="workout-body">
+        <div style="padding: 1rem 1.2rem; font-size: 0.82rem; color: var(--muted); border-bottom: 1px solid var(--border);">
+          As many rounds as possible in 20 minutes. Zero planned rest — pace yourself to keep moving the full time.
+        </div>
+        <div class="circuit-grid">
+          <div class="circuit-item"><span class="circuit-num">1</span><div><div class="circuit-name">KB Swings</div><div class="circuit-reps">15 reps</div></div></div>
+          <div class="circuit-item"><span class="circuit-num">2</span><div><div class="circuit-name">Push-ups</div><div class="circuit-reps">12 reps</div></div></div>
+          <div class="circuit-item"><span class="circuit-num">3</span><div><div class="circuit-name">Goblet Squat</div><div class="circuit-reps">12 reps</div></div></div>
+          <div class="circuit-item"><span class="circuit-num">4</span><div><div class="circuit-name">Dumbbell Row</div><div class="circuit-reps">10/arm</div></div></div>
+          <div class="circuit-item"><span class="circuit-num">5</span><div><div class="circuit-name">Burpees</div><div class="circuit-reps">8 reps</div></div></div>
+          <div class="circuit-item"><span class="circuit-num">6</span><div><div class="circuit-name">Jump Squats</div><div class="circuit-reps">10 reps</div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- CARDIO -->
+<section id="cardio">
+  <p class="section-label">Cardio Plan</p>
+  <h2>Strategic Cardio Ramp-Up</h2>
+  <p class="section-intro">Cardio intensity escalates across the 12 weeks to keep the body in fat-burning mode without sacrificing recovery or strength.</p>
+
+  <div class="cardio-timeline">
+    <div class="cardio-item">
+      <div class="cardio-week">Weeks 1 – 4</div>
+      <div class="cardio-desc">3 × 20 min LISS</div>
+      <div class="cardio-detail">Incline treadmill walk (3.5–4 mph, 10–15% grade), cycling, or easy rowing at conversational pace</div>
+    </div>
+    <div class="cardio-item">
+      <div class="cardio-week">Weeks 5 – 8</div>
+      <div class="cardio-desc">2 × LISS + 2 × 10 min HIIT</div>
+      <div class="cardio-detail">HIIT after Mon &amp; Thu strength sessions. 20s max effort / 10s rest × 20 rounds on bike, rower, or treadmill</div>
+    </div>
+    <div class="cardio-item">
+      <div class="cardio-week">Weeks 9 – 12</div>
+      <div class="cardio-desc">1 × LISS + 3 × HIIT + optional fasted walks</div>
+      <div class="cardio-detail">Optional: 20 min fasted morning cardio (incline walk or light bike) 3× per week before breakfast</div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- NUTRITION -->
+<section id="nutrition">
+  <p class="section-label">Nutrition</p>
+  <h2>Eat to Get Lean,<br>Not Just Small.</h2>
+  <p class="section-intro">Nutrition is 70% of the result. A precise caloric deficit with high protein preserves muscle while your body burns fat for fuel.</p>
+
+  <div class="nutrition-grid">
+    <div class="nutrition-card">
+      <h3>Macro Targets</h3>
+      <div class="macro-item">
+        <span class="macro-name">Calories</span>
+        <span class="macro-val">TDEE − 300–500</span>
+      </div>
+      <div class="macro-item">
+        <span class="macro-name">Protein</span>
+        <span class="macro-val">0.8–1g / lb BW</span>
+      </div>
+      <div class="macro-item">
+        <span class="macro-name">Carbohydrates</span>
+        <span class="macro-val">1.5–2g / lb BW</span>
+      </div>
+      <div class="macro-item">
+        <span class="macro-name">Fat</span>
+        <span class="macro-val">0.35–0.5g / lb BW</span>
+      </div>
+      <div class="macro-item">
+        <span class="macro-name">TDEE estimate</span>
+        <span class="macro-val">BW (lbs) × 15</span>
+      </div>
+    </div>
+
+    <div class="nutrition-card">
+      <h3>Meal Timing</h3>
+      <div class="macro-item">
+        <span class="macro-name">Pre-workout (60–90 min before)</span>
+        <span class="macro-val" style="font-size:0.75rem; text-align:right;">Oats + eggs · Rice + chicken</span>
+      </div>
+      <div class="macro-item">
+        <span class="macro-name">Post-workout (within 60 min)</span>
+        <span class="macro-val" style="font-size:0.75rem; text-align:right;">Rice · Sweet potato · Protein shake</span>
+      </div>
+      <div class="macro-item">
+        <span class="macro-name">Before bed</span>
+        <span class="macro-val" style="font-size:0.75rem; text-align:right;">Cottage cheese · Greek yogurt · Casein</span>
+      </div>
+    </div>
+  </div>
+
+  <div style="background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 1.8rem;">
+    <h3 style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--muted); margin-bottom: 1.4rem;">Foods to Prioritise</h3>
+    <div class="food-category">
+      <div class="food-cat-label">Protein Sources</div>
+      <div class="food-tags">
+        <span class="food-tag">Chicken Breast</span>
+        <span class="food-tag">Turkey</span>
+        <span class="food-tag">Lean Beef</span>
+        <span class="food-tag">Eggs</span>
+        <span class="food-tag">Greek Yogurt</span>
+        <span class="food-tag">Cottage Cheese</span>
+        <span class="food-tag">Tuna</span>
+        <span class="food-tag">Salmon</span>
+        <span class="food-tag">Whey / Casein</span>
+      </div>
+    </div>
+    <div class="food-category">
+      <div class="food-cat-label">Carbohydrates</div>
+      <div class="food-tags">
+        <span class="food-tag">White/Brown Rice</span>
+        <span class="food-tag">Sweet Potato</span>
+        <span class="food-tag">Oats</span>
+        <span class="food-tag">Quinoa</span>
+        <span class="food-tag">Fruit</span>
+        <span class="food-tag">Vegetables</span>
+      </div>
+    </div>
+    <div class="food-category">
+      <div class="food-cat-label">Healthy Fats</div>
+      <div class="food-tags">
+        <span class="food-tag">Avocado</span>
+        <span class="food-tag">Olive Oil</span>
+        <span class="food-tag">Almonds</span>
+        <span class="food-tag">Walnuts</span>
+        <span class="food-tag">Whole Eggs</span>
+        <span class="food-tag">Fatty Fish</span>
+      </div>
+    </div>
+    <div class="food-category" style="margin-bottom:0;">
+      <div class="food-cat-label" style="color: #e63946;">Avoid</div>
+      <div class="food-tags">
+        <span class="food-tag" style="border-color: rgba(230,57,70,0.3); color: var(--muted);">Alcohol</span>
+        <span class="food-tag" style="border-color: rgba(230,57,70,0.3); color: var(--muted);">Processed Sugar</span>
+        <span class="food-tag" style="border-color: rgba(230,57,70,0.3); color: var(--muted);">Fried Foods</span>
+        <span class="food-tag" style="border-color: rgba(230,57,70,0.3); color: var(--muted);">Excess Sodium</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- SUPPLEMENTS -->
+<section id="supplements">
+  <p class="section-label">Supplements</p>
+  <h2>Optional. Effective. Evidence-Based.</h2>
+  <p class="section-intro">None of these are magic — food comes first. But these are the few with solid research behind them.</p>
+
+  <div class="supps-grid">
+    <div class="supp-card">
+      <div class="supp-icon">💪</div>
+      <div>
+        <div class="supp-name">Creatine Monohydrate</div>
+        <div class="supp-detail">5g/day · Any time · Consistent daily use — improves strength output and reduces muscle fatigue</div>
+      </div>
+    </div>
+    <div class="supp-card">
+      <div class="supp-icon">🥤</div>
+      <div>
+        <div class="supp-name">Whey Protein</div>
+        <div class="supp-detail">25–50g · Post-workout or to hit daily protein targets — convenient complete protein source</div>
+      </div>
+    </div>
+    <div class="supp-card">
+      <div class="supp-icon">⚡</div>
+      <div>
+        <div class="supp-name">Caffeine / Pre-workout</div>
+        <div class="supp-detail">150–300mg caffeine · 30 min pre-session · Increases strength, endurance, and fat oxidation</div>
+      </div>
+    </div>
+    <div class="supp-card">
+      <div class="supp-icon">🐟</div>
+      <div>
+        <div class="supp-name">Omega-3 Fish Oil</div>
+        <div class="supp-detail">2–3g/day · With meals · Reduces inflammation, supports joint health and recovery</div>
+      </div>
+    </div>
+    <div class="supp-card">
+      <div class="supp-icon">☀️</div>
+      <div>
+        <div class="supp-name">Vitamin D3</div>
+        <div class="supp-detail">2000–4000 IU/day · With a meal · Supports testosterone levels, bone health, and immunity</div>
+      </div>
+    </div>
+    <div class="supp-card">
+      <div class="supp-icon">🌙</div>
+      <div>
+        <div class="supp-name">Magnesium Glycinate</div>
+        <div class="supp-detail">300–400mg · Before bed · Improves sleep quality and recovery — often deficient in active people</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- RECOVERY -->
+<section id="recovery">
+  <p class="section-label">Recovery</p>
+  <h2>Muscle is Built at Rest.</h2>
+  <p class="section-intro">Training is the stimulus. Recovery is where the adaptation actually happens. Neglect this and you'll spin your wheels.</p>
+
+  <div class="recovery-grid">
+    <div class="recovery-card">
+      <div class="recovery-icon">😴</div>
+      <h4>Sleep 7–9 Hours</h4>
+      <p>Growth hormone peaks during deep sleep. Poor sleep elevates cortisol, impairs fat loss, and destroys muscle retention.</p>
+    </div>
+    <div class="recovery-card">
+      <div class="recovery-icon">💧</div>
+      <h4>Hydrate 3–4L / Day</h4>
+      <p>Even mild dehydration reduces strength by up to 10%. Drink water consistently throughout the day, not just during training.</p>
+    </div>
+    <div class="recovery-card">
+      <div class="recovery-icon">🔄</div>
+      <h4>Deload Week 6</h4>
+      <p>After week 6, train at 50–60% intensity for one week. Prevents burnout, consolidates strength gains, and refreshes the CNS.</p>
+    </div>
+    <div class="recovery-card">
+      <div class="recovery-icon">🧘</div>
+      <h4>Manage Stress</h4>
+      <p>High cortisol from chronic stress actively impairs fat loss and breaks down muscle tissue. Treat stress management as training.</p>
+    </div>
+    <div class="recovery-card">
+      <div class="recovery-icon">🔥</div>
+      <h4>Foam Roll Daily</h4>
+      <p>5–10 min pre and post session. Focus on tight areas: quads, hip flexors, lats, thoracic spine. Improves mobility and blood flow.</p>
+    </div>
+    <div class="recovery-card">
+      <div class="recovery-icon">🚶</div>
+      <h4>Active Recovery Saturday</h4>
+      <p>Walk, swim, cycle lightly, or do yoga. Keep moving without stressing the body. Boosts circulation and clears metabolic waste.</p>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- PROGRESS -->
+<section id="progress">
+  <p class="section-label">Progress Tracking</p>
+  <h2>Track What Matters.</h2>
+  <p class="section-intro">You can't manage what you don't measure. These four metrics give you the full picture — don't rely on bodyweight alone.</p>
+
+  <div class="tracker-grid">
+    <div class="tracker-item">
+      <div class="tracker-bullet"></div>
+      <span>Bodyweight — same time, same conditions (morning, post-bathroom)</span>
+    </div>
+    <div class="tracker-item">
+      <div class="tracker-bullet"></div>
+      <span>Waist measurement at navel (weekly)</span>
+    </div>
+    <div class="tracker-item">
+      <div class="tracker-bullet"></div>
+      <span>Key lift numbers — bench, squat, deadlift, pull-up</span>
+    </div>
+    <div class="tracker-item">
+      <div class="tracker-bullet"></div>
+      <span>Weekly progress photos — front, side, back</span>
+    </div>
+  </div>
+
+  <p class="section-label" style="margin-bottom: 1rem;">12-Week Milestones</p>
+  <div class="milestones">
+    <div class="milestone">
+      <div class="milestone-weeks">Weeks 1 – 2</div>
+      <div class="milestone-text">Establishing habits, tracking nutrition, dialling in form on compound lifts.</div>
+    </div>
+    <div class="milestone">
+      <div class="milestone-weeks">Weeks 3 – 4</div>
+      <div class="milestone-text">Noticeable increase in endurance and session intensity. Weights going up.</div>
+    </div>
+    <div class="milestone">
+      <div class="milestone-weeks">Weeks 5 – 6</div>
+      <div class="milestone-text">First visible fat loss, muscle definition starting to emerge. Strength gains on main lifts.</div>
+    </div>
+    <div class="milestone">
+      <div class="milestone-weeks">Weeks 7 – 8</div>
+      <div class="milestone-text">Significant physique change. Muscles more defined. Waist measurement down noticeably.</div>
+    </div>
+    <div class="milestone">
+      <div class="milestone-weeks">Weeks 9 – 10</div>
+      <div class="milestone-text">Conditioning peaks. Higher caloric burn per session. Visible vascularity and striations appearing.</div>
+    </div>
+    <div class="milestone">
+      <div class="milestone-weeks">Weeks 11 – 12</div>
+      <div class="milestone-text">Leanest you have ever been. Strength gains preserved. Time to take your after photo.</div>
+    </div>
+  </div>
+
+  <div class="results-callout">
+    <h3>Expected Results — Consistent Effort</h3>
+    <div class="results-row">
+      <div class="result-item">
+        <span class="result-val">0.5–1lb</span>
+        <span class="result-label">Fat lost / week</span>
+      </div>
+      <div class="result-item">
+        <span class="result-val">6–12lbs</span>
+        <span class="result-label">Total fat lost</span>
+      </div>
+      <div class="result-item">
+        <span class="result-val">Wk 6–8</span>
+        <span class="result-label">Visible definition</span>
+      </div>
+      <div class="result-item">
+        <span class="result-val">+</span>
+        <span class="result-label">Strength retained</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<footer>
+  <p class="disclaimer">Consult a healthcare professional before starting any new exercise or nutrition program. Adjust training volume and calories based on your individual response and recovery.</p>
+  <p style="color: var(--border);">12-Week Cut Program &copy; 2026</p>
+</footer>
+
+<script>
+  function switchPhase(id, tab) {
+    document.querySelectorAll('.phase-content').forEach(el => el.classList.remove('active'));
+    document.querySelectorAll('.phase-tab').forEach(el => el.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    tab.classList.add('active');
+  }
+
+  function toggleDay(header) {
+    const day = header.closest('.workout-day');
+    day.classList.toggle('open');
+  }
+</script>
+</body>
+</html>
